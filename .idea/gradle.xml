@@ -10,6 +10,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/HW06-reflections" />
+            <option value="$PROJECT_DIR$/HW08-gc" />
+            <option value="$PROJECT_DIR$/HW08-gc/demo" />
+            <option value="$PROJECT_DIR$/HW08-gc/homework" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/hw01-gradle" />
             <option value="$PROJECT_DIR$/hw04-generics" />
