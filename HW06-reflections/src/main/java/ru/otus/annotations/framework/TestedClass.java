@@ -5,7 +5,7 @@ public class TestedClass {
     public Integer account = 5;
 
     @Before
-    public int increment(){
+    public int startInc(){
        return account ++;
     }
 
