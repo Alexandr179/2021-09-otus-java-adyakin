@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="otusJava.HW08-gc.demo" target="17" />
+      <module name="otusJava.HW08-gc.demo.main" target="17" />
+      <module name="otusJava.HW08-gc.demo.test" target="17" />
+      <module name="otusJava.HW08-gc.homework" target="17" />
+      <module name="otusJava.HW08-gc.homework.main" target="17" />
+      <module name="otusJava.HW08-gc.homework.test" target="17" />
+      <module name="otusJava.HW10-byteCodes" target="17" />
+      <module name="otusJava.HW10-byteCodes.main" target="17" />
+      <module name="otusJava.HW10-byteCodes.test" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
