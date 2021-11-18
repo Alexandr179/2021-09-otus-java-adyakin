@@ -17,5 +17,3 @@ Mac (Retina 5K, 27-inch, Late 2015)
 Расход heap - можем сократить до
 -Xms450m
 -Xmx450m
-
-Resume: наглядно и убедительно 
