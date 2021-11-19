@@ -35,5 +35,4 @@ out
 *.iml
 *.iws
 *.ipr
-*.idea
-
+.idea
