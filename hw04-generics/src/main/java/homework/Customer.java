@@ -2,12 +2,11 @@ package homework;
 
 import java.util.Objects;
 
-public class Customer {
+public class Customer implements Comparable<Customer> {
     private final long id;
     private String name;
     private long scores;
 
-    //todo: 1. в этом классе надо исправить ошибки
 
     public Customer(long id, String name, long scores) {
         this.id = id;
@@ -45,7 +44,6 @@ public class Customer {
                 '}';
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -57,5 +55,15 @@ public class Customer {
     @Override
     public int hashCode() {
         return Objects.hash(getId());
+    }
+
+    @Override
+    public int compareTo(Customer customer) {// https://stackoverflow.com/questions/1440006/java-sortedmap-treemap-comparable-how-to-use
+        if(scores == customer.getScores()) return 0;
+        if(scores > customer.getScores()) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 }

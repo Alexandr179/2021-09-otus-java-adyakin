@@ -1,6 +1,5 @@
 package homework;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,10 +10,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class CustomerTest {
 
-    // Все тесты должны проходить, менять тесты не надо.
-
     @Test
-//    @Disabled //надо удалить
     @DisplayName("Объект Customer как ключ в карте")
     void customerAsKeyTest() {
         //given
@@ -24,25 +20,20 @@ class CustomerTest {
 
         String expectedData = "data";
         map.put(customer, expectedData);
-
         //when
         long newScore = customer.getScores() + 10;
         String factData = map.get(new Customer(customerId, "IvanChangedName", newScore));
-
         //then
         assertThat(factData).isEqualTo(expectedData);
-
         //when
         long newScoreSecond = customer.getScores() + 20;
         customer.setScores(newScoreSecond);
         String factDataSecond = map.get(customer);
-
         //then
         assertThat(factDataSecond).isEqualTo(expectedData);
     }
 
     @Test
-    @Disabled //надо удалить
     @DisplayName("Сортировка по полю score, итерация по возрастанию")
     void scoreSortingTest() {
         //given
@@ -61,8 +52,7 @@ class CustomerTest {
         assertThat(smallestScore.getKey()).isEqualTo(customer2);
 
         //when
-        // подсказка:
-        // a key-value mapping associated with the least key strictly greater than the given key, or null if there is no such key.
+        //a key-value mapping associated with the least key strictly greater than the given key, or null if there is no such key.
         Map.Entry<Customer, String> middleScore = customerService.getNext(new Customer(10, "Key", 20));
         //then
         assertThat(middleScore.getKey()).isEqualTo(customer1);
@@ -78,11 +68,9 @@ class CustomerTest {
         Map.Entry<Customer, String> notExists = customerService.getNext(new Customer(100, "Not exists", 20000));
         //then
         assertThat(notExists).isNull();
-
     }
 
     @Test
-    @Disabled //надо удалить
     @DisplayName("Модификация коллекции")
     void mutationTest() {
         //given
@@ -100,11 +88,13 @@ class CustomerTest {
         smallestScore.getKey().setName("Vasyl");
 
         //then
+        String name = customerService.getSmallest().getKey().getName();
+        String name1 = customer2.getName();
+
         assertThat(customerService.getSmallest().getKey().getName()).isEqualTo(customer2.getName());
     }
 
     @Test
-//    @Disabled //надо удалить
     @DisplayName("Возвращание в обратном порядке")
     void reverseOrderTest() {
         //given
@@ -121,12 +111,10 @@ class CustomerTest {
         Customer customerLast = customerReverseOrder.take();
         //then
         assertThat(customerLast).usingRecursiveComparison().isEqualTo(customer3);
-
         //when
         Customer customerMiddle = customerReverseOrder.take();
         //then
         assertThat(customerMiddle).usingRecursiveComparison().isEqualTo(customer2);
-
         //when
         Customer customerFirst = customerReverseOrder.take();
         //then
