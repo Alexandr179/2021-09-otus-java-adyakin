@@ -2,29 +2,22 @@ package ru.otus.annotations.framework;
 
 public class TestedClass {
 
-    public Integer account = 5;
-
     @Before
-    public int increment(){
-       return account ++;
+    public void beforeTest(){
     }
 
     @Test
-    public int tested(){
-        return account;
+    public void test(){
+        throw new IllegalArgumentException();
     }
 
     @After
-    public int goBack(){
-        return account --;
+    public void afterTest(){
     }
-
 
 
     @Override
     public String toString() {
-        return "TestedClass {" +
-                "account = " + account +
-                '}';
+        return "TestedClass{}";
     }
 }

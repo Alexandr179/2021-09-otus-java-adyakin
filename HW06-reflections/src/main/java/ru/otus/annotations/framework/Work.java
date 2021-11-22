@@ -6,8 +6,10 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static ru.otus.annotations.framework.ReflectionHelper.callMethod;
 
 public class Work {
 
@@ -26,56 +28,47 @@ public class Work {
     }
 
 
-    /**
-     *   assertThat().isEqualTo()  Framework primitive realisation
-     */
-    private static void work(String clazzName) throws IllegalAccessException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException {
+    private static void work(String clazzName) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Class<?> clazz = Class.forName(clazzName);
         Constructor<?> constructor = clazz.getConstructor();
-
+        Object object = constructor.newInstance();//  "..СВОЙ объект класса-теста"
         Method[] methodsAll = clazz.getDeclaredMethods();
-        Field[] fieldsPublic = clazz.getFields();
-        Optional<Field> fieldOptional = Arrays.stream(fieldsPublic).findFirst();
 
-        Object object = constructor.newInstance();
-        Field field = fieldOptional.get();
-        Integer account = (Integer) field.get(object);
-
+        AtomicInteger successCounter = new AtomicInteger();
+        AtomicInteger failedCounter = new AtomicInteger();
         Arrays.stream(methodsAll).forEach(method -> {
-//            System.out.println("Method is: " + method.getName() + "()");
             Annotation[] annotations = method.getDeclaredAnnotations();
-//            System.out.println(Arrays.toString(annotations));
             Arrays.stream(annotations)
                     .findAny()
                     .ifPresent(annotation -> {
-                        if(annotation.annotationType().getTypeName().contains("Before")) {
-                            ReflectionHelper.callMethod(object, "increment");
-                            Integer incremented = (Integer) ReflectionHelper.getFieldValue(object, "account");
-                            if (account == incremented - 1) {
-                                System.out.println("Success test @Before: " + method.getName() + "()");
-                            } else {
-                                System.err.println("Failed test @Before: " + method.getName() + "()");
+                        if (annotation.annotationType().equals(Before.class)) {
+                            try {
+                                callMethod(object, method.getName());
+                                successCounter.getAndIncrement();
+                            } catch (Throwable e) {
+                                failedCounter.getAndIncrement();
                             }
-                        }
-                        else if(annotation.annotationType().getTypeName().contains("Test")) {
-                            ReflectionHelper.callMethod(object, "tested");
-                            Integer incremented = (Integer) ReflectionHelper.getFieldValue(object, "account");
-                            if (Objects.equals(account, incremented - 1)) {
-                                System.out.println("Success test @Test: " + method.getName() + "()");
-                            } else {
-                                System.err.println("Failed test @Test: " + method.getName() + "()");
+                        } else if (annotation.annotationType().equals(Test.class)) {
+                            try {
+                                callMethod(object, method.getName());
+                                successCounter.getAndIncrement();
+                            } catch (Throwable e) {
+                                failedCounter.getAndIncrement();
                             }
-                        }
-                        else if(annotation.annotationType().getTypeName().contains("After")) {
-                            ReflectionHelper.callMethod(object, "goBack");
-                            Integer incremented = (Integer) ReflectionHelper.getFieldValue(object, "account");
-                            if (account == incremented) {
-                                System.out.println("Success test @After: " + method.getName() + "()");
-                            } else {
-                                System.err.println("Failed test @After: " + method.getName() + "()");
+                        } else if (annotation.annotationType().equals(After.class)) {
+                            try {
+                                callMethod(object, method.getName());
+                                successCounter.getAndIncrement();
+                            } catch (Throwable e) {
+                                failedCounter.getAndIncrement();
                             }
                         }
                     });
         });
+
+        int success = successCounter.get();
+        int fail = failedCounter.get();
+        int total = success + fail;
+        System.out.println("Statistic: tests " + total + " methods. Successes - " + success + ", failed - " + fail);
     }
 }
