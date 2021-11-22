@@ -1,7 +1,10 @@
-package ru.otus;
+package ru.otus.aop.proxy;
 
-import ru.otus.aop.proxy.IocClassInterface;
 import ru.otus.reflection.Log;
+
+/**
+ * class packaging only..
+ */
 
 public class TestLogging implements IocClassInterface {
 
