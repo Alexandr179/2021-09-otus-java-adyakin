@@ -8,6 +8,10 @@ public class TestedClass {
 
     @Test
     public void test(){
+    }
+
+    @Test
+    public void test2(){
         throw new IllegalArgumentException();
     }
 
