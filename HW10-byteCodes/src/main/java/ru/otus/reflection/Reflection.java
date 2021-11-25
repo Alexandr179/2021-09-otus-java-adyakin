@@ -1,28 +1,28 @@
 package ru.otus.reflection;
 
-import org.reflections.Reflections;
-
-import java.lang.annotation.Annotation;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.Set;
+import java.util.Optional;
 
 public class Reflection {
 
-    public static boolean annotationOnMethodPresent;
-
-    public static void reflectionLogProcess(Method interfaceMethod, Object[] args) {
+    public static void reflectionLogProcess(Method interfaceMethod, Object[] args) throws IOException, ClassNotFoundException {
         Class<?> interfaceClazz = interfaceMethod.getDeclaringClass();
         Package aPackage = interfaceClazz.getPackage();
-        Set<Class<?>> classesSet = new Reflections(aPackage.getName()).getSubTypesOf((Class<Object>) interfaceClazz);// https://qna.habr.com/q/51694
-        classesSet.forEach(clazz -> {
-            try {
-                Method declaredMethod = clazz.getDeclaredMethod(interfaceMethod.getName(), interfaceMethod.getParameterTypes());
-                annotationOnMethodPresent = declaredMethod.isAnnotationPresent(Log.class);
-                if(annotationOnMethodPresent)  System.out.println("executed method: " + declaredMethod.getName() + ", param: " + Arrays.toString(args));
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            }
-        });
+
+        String name = interfaceMethod.getName();
+        Class<?>[] clazzes = ClassLoaderHelper.getClasses(aPackage.getName());
+        Optional<Class<?>> optClazzWithLogAnnotationMethod = Arrays.stream(clazzes)
+                .filter(clazz -> {
+                    Optional<Method> implClassWithLogAnnotationMethod = Arrays.stream(clazz.getDeclaredMethods())
+                            .filter(classMethod -> classMethod.getName().equals(name) && classMethod.isAnnotationPresent(Log.class))
+                            .findFirst();
+                    return implClassWithLogAnnotationMethod.isPresent();
+                })
+                .findFirst();
+
+        if(optClazzWithLogAnnotationMethod.isPresent())
+            System.out.println("executed method: " + interfaceMethod.getName() + ", param: " + Arrays.toString(args));
     }
 }

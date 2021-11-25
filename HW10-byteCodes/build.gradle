@@ -7,6 +7,6 @@ targetCompatibility = JavaVersion.VERSION_17
 
 dependencies {
     // https://mvnrepository.com/artifact/org.reflections/reflections
-    implementation group: 'org.reflections', name: 'reflections', version: '0.10.2'
+//    implementation group: 'org.reflections', name: 'reflections', version: '0.10.2'
 
 }

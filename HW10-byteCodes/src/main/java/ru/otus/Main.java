@@ -4,9 +4,6 @@ import ru.otus.aop.proxy.Ioc;
 import ru.otus.aop.proxy.IocClassInterface;
 import ru.otus.aop.proxy.TestLogging;
 
-/**
- * WITHOUT suppress SLF4J-warnings (ТЗ: ..явного вызова логирования быть не должно)
- */
 
 public class Main {
 
