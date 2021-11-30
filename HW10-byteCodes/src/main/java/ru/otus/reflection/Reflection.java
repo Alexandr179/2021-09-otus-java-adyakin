@@ -1,5 +1,7 @@
 package ru.otus.reflection;
 
+import ru.otus.aop.proxy.Log;
+
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Arrays;

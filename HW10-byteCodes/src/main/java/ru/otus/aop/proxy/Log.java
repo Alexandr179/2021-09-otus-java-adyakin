@@ -1,4 +1,4 @@
-package ru.otus.reflection;
+package ru.otus.aop.proxy;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

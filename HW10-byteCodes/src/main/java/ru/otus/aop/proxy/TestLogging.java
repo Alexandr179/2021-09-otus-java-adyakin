@@ -1,20 +1,6 @@
 package ru.otus.aop.proxy;
 
-import ru.otus.reflection.Log;
+public interface TestLogging {
 
-/**
- * class packaging only..
- */
-
-public class TestLogging implements IocClassInterface {
-
-    @Override
-    @Log
-    public void calculation(Integer param) {
-    }
-
-    @Override
-    public String toString() {
-        return "TestLoggingImpl{}";
-    }
+    void calculation(Integer param);
 }

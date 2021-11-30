@@ -1,15 +1,14 @@
 package ru.otus;
 
 import ru.otus.aop.proxy.Ioc;
-import ru.otus.aop.proxy.IocClassInterface;
 import ru.otus.aop.proxy.TestLogging;
-
+import ru.otus.aop.proxy.TestLoggingImpl;
 
 public class Main {
 
     public static void main(String[] args) {
-        IocClassInterface iocClass = Ioc.createIocClass(new TestLogging());
-        // call method by <iocClass>
+        TestLogging testLogging = new TestLoggingImpl();
+        TestLogging iocClass = Ioc.createIocClass(testLogging);
         iocClass.calculation(6);
     }
 }
