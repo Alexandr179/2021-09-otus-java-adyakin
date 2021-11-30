@@ -1,44 +1,34 @@
 package homework;
 
-
 import java.util.Map;
-import java.util.SortedMap;
+import java.util.NavigableMap;
 import java.util.TreeMap;
 
 public class CustomerService {
 
-    //важно подобрать подходящую Map-у, посмотрите на редко используемые методы, они тут полезны
-    public SortedMap<Customer, String> map = new TreeMap<>();
+    private final NavigableMap<Customer, String> customers;
 
+    public CustomerService() {
+        customers = new TreeMap<>();
+    }
+
+    /**
+     * тесты меняют состояние объекта !(в нашем случае ..и не откатывают состояние Map)
+     * поэтому надо возвращать копию объекта.
+     */
 
     public Map.Entry<Customer, String> getSmallest() {
-        Customer customer = map.firstKey();// smallest Customer
-        String string = map.get(customer);
-        return Map.entry(customer, string);
+        return new TreeMap<>(customers).firstEntry();
     }
 
-    public Map.Entry<Customer, String> getNext(Customer customer) {
-        return map.entrySet().stream()
-                .filter(currentEntry -> currentEntry.getKey().getName().equals(customer.getName()))
-                .findFirst()
-                .orElse(null);
+    public Map.Entry<Customer, String> getNext(Customer customer) {// ближайшее в Map по отношению к подаваемому (по score)
+        return new TreeMap<>(customers)
+//                .entrySet().stream()
+//                .filter(customerEntry -> customerEntry.getKey().getName().equals(customer.getName()))
+                .higherEntry(customer);
     }
-
-// todo: УСЛОВИЕ ..  a key-value mapping associated with the least key strictly greater than the given key, or null if there is no such key
-//                                  означает? ->
-// todo:        поиск в стриме максимально приближенного (по score) значения к подаваемому на вход <Customer customer> с идентечным именем (Name)
-
-//    public Map.Entry<Customer, String> getNext(Customer customer) {
-//        return map.entrySet().stream()
-//                .reduce((left, right) ->
-//                        (Math.abs(left.getKey().getScores() - customer.getScores()) < Math.abs(right.getKey().getScores() - customer.getScores()))
-//                                ? left : right)
-//                .filter(currentEntry -> currentEntry.getKey().getName().equals(customer.getName()))
-//                //&& currentEntry.getKey().getScores    () > customer.getScores()
-//                .orElse(null);
-//    }
 
     public void add(Customer customer, String data) {
-        map.put(customer, data);
+        customers.put(new Customer(customer), data);
     }
 }

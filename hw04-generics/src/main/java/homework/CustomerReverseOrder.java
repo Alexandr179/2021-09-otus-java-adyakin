@@ -13,12 +13,11 @@ public class CustomerReverseOrder {
         customerQueue = new ArrayDeque<>();
     }
 
-
     public void add(Customer customer) {
-        customerQueue.addLast(customer);
+        customerQueue.push(customer);
     }
 
     public Customer take() {
-        return customerQueue.removeLast();
+        return customerQueue.pop();
     }
 }

@@ -3,7 +3,7 @@ package homework;
 import java.util.Objects;
 
 public class Customer implements Comparable<Customer> {
-    private final long id;
+    private long id;
     private String name;
     private long scores;
 
@@ -12,6 +12,10 @@ public class Customer implements Comparable<Customer> {
         this.id = id;
         this.name = name;
         this.scores = scores;
+    }
+
+    public Customer(Customer cust) {
+        this(cust.getId(), cust.getName(), cust.getScores());
     }
 
     public long getId() {
