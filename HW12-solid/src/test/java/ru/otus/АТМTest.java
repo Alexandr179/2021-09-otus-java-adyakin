@@ -55,20 +55,20 @@ class АТМTest {
 
     @Test
     void lookSafe() {
-        assertThat(NOTES_SIZE).isEqualTo(АТМ.lookSafe().values().size());
+        assertThat(NOTES_SIZE).isEqualTo(АТМ.lookAtMapSafe().values().size());
     }
 
 
     @Test
     void takeFromSafeAndAccumulate() throws IllegalAccessException {
         АТМ.takeFromSafe(SUM_TO_GETTING);
-        assertThat(DEFERENCE).isEqualTo(АТМ.accumulateLookSafe());
+        assertThat(DEFERENCE).isEqualTo(АТМ.lookAtIntSafe());
     }
 
     @Test
     @Disabled
     void accumulateLookSafe() {
-        assertThat(ACCUM_ACCOUNT_SUM).isEqualTo(АТМ.accumulateLookSafe());
+        assertThat(ACCUM_ACCOUNT_SUM).isEqualTo(АТМ.lookAtIntSafe());
     }
 
     @Test
