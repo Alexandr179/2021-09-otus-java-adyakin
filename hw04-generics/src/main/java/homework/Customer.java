@@ -14,8 +14,8 @@ public class Customer implements Comparable<Customer> {
         this.scores = scores;
     }
 
-    public Customer(Customer cust) {
-        this(cust.getId(), cust.getName(), cust.getScores());
+    public Customer(Customer customer) {
+        this(customer.getId(), customer.getName(), customer.getScores());
     }
 
     public long getId() {
