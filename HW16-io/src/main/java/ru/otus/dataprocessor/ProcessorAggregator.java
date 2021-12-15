@@ -4,12 +4,18 @@ import ru.otus.model.Measurement;
 
 import java.util.List;
 import java.util.Map;
+import java.util.NavigableMap;
+import java.util.TreeMap;
+import java.util.function.BiFunction;
+import java.util.stream.Collectors;
 
 public class ProcessorAggregator implements Processor {
 
     @Override
     public Map<String, Double> process(List<Measurement> data) {
-        //группирует выходящий список по name, при этом суммирует поля value
-        return null;
+        NavigableMap<String, Double> map = new TreeMap<>();
+        BiFunction<Double, Double, Double> bFunc = Double::sum;
+        data.forEach(measurement -> map.merge(measurement.getName(), measurement.getValue(), bFunc));
+        return map;
     }
 }

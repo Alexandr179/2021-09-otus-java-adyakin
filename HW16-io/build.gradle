@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'idea'
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -9,8 +10,9 @@ dependencies {
     implementation 'com.google.guava:guava'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
     implementation 'javax.json:javax.json-api'
-    implementation 'org.glassfish:javax.json'
-    implementation 'com.google.protobuf:protobuf-java-util'
+    implementation 'com.google.code.gson:gson:2.8.8'
+    // https://mvnrepository.com/artifact/org.json/json
+    implementation 'org.json:json:20210307'
 
     testImplementation ('org.junit.jupiter:junit-jupiter-api')
     testImplementation ('org.junit.jupiter:junit-jupiter-engine')
