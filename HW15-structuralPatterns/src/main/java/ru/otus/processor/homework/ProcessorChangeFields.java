@@ -5,7 +5,6 @@ import ru.otus.processor.Processor;
 
 public class ProcessorChangeFields implements Processor {
 
-
     @Override
     public Message process(Message message) {
         String field12 = message.getField12();

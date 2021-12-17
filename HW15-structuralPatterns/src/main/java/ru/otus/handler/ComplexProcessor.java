@@ -3,7 +3,6 @@ package ru.otus.handler;
 import ru.otus.model.Message;
 import ru.otus.listener.Listener;
 import ru.otus.processor.Processor;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;

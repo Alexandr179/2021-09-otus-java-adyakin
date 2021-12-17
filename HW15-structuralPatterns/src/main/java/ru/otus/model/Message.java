@@ -1,5 +1,6 @@
 package ru.otus.model;
 
+
 public class Message {
     private final long id;
     private final String field1;
@@ -88,16 +89,14 @@ public class Message {
     }
 
     public ObjectForMessage getField13() {
-        return field13;
+        return new ObjectForMessage().deepClone(field13);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Message message = (Message) o;
-
         return id == message.id;
     }
 
@@ -129,7 +128,6 @@ public class Message {
                 ", field13='" + field13 + '\'' +
                 '}';
     }
-
 
 
 

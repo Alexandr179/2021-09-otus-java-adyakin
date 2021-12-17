@@ -5,6 +5,8 @@ import  org.junit.jupiter.api.Test;
 import ru.otus.model.Message;
 import ru.otus.model.ObjectForMessage;
 import java.util.ArrayList;
+import java.util.List;
+
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 class HistoryListenerTest {

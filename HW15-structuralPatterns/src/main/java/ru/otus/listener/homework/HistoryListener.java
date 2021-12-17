@@ -4,26 +4,22 @@ import ru.otus.listener.Listener;
 import ru.otus.model.Message;
 
 import java.time.LocalDateTime;
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 public class HistoryListener implements Listener, HistoryReader {
 
-    private final Deque<MessageEntry> history = new ArrayDeque<>();
+    private final Map<Long, MessageEntry> history = new HashMap<>();
 
     @Override
     public void onUpdated(Message msg) {
-        history.push(new MessageEntry(msg, LocalDateTime.now()));
+        Message msgCopy = msg.toBuilder().field13(msg.getField13()).field10(msg.getField10()).build();
+        history.put(msg.getId(), new MessageEntry(msgCopy, LocalDateTime.now()));
     }
 
     @Override
-    public Optional<Message> findMessageById(long id) {// get copy
-        Deque<MessageEntry> historyCopy = new ArrayDeque<>();
-        history.forEach(messageEntry -> historyCopy.push(new MessageEntry(messageEntry.message(), messageEntry.createdAt())));
-        return historyCopy.stream()
-                .filter(entry -> entry.message().getId() == id)
-                .findFirst()
-                .map(MessageEntry::message);
+    public Optional<Message> findMessageById(long id) {
+        return Optional.of(history.get(id).message());
     }
 }
