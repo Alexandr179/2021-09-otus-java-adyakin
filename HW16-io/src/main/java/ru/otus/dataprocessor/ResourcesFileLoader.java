@@ -14,8 +14,7 @@ public class ResourcesFileLoader implements Loader {
     private String jsonString;
 
     public ResourcesFileLoader(String resourceFileName) {
-        InputStream resourceAsStream = ResourcesFileLoader.class.getClassLoader().getResourceAsStream(resourceFileName);
-        try {
+        try (InputStream resourceAsStream = ResourcesFileLoader.class.getClassLoader().getResourceAsStream(resourceFileName)) {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(resourceAsStream));
             jsonString = bufferedReader.readLine();
         } catch (IOException e) {

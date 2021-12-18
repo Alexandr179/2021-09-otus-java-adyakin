@@ -21,7 +21,7 @@ public class FileSerializer implements Serializer {
     @Override
     public void serialize(Map<String, Double> data) {
         try {
-            writeTextFile(new ObjectMapper().writeValueAsString(sortMapByDoubleValue(data)));
+            writeTextFile(new ObjectMapper().writeValueAsString(data));
         } catch (FileProcessException | IOException e) {
             e.printStackTrace();
         }
