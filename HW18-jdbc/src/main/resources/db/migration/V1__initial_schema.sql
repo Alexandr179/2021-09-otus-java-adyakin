@@ -1,6 +1,6 @@
 create table test
 (
-    id   int,
+    id   bigserial not null primary key,
     name varchar(50)
 );
 create table client

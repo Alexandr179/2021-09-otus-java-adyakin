@@ -1,0 +1,4 @@
+docker: Error response from daemon: Conflict. The container name "/pg-docker" is already in use by container "0e265f9862773b4c4b8c828af1975a68b8a84759a7d79556139ba2362c3aaa4d". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+docker: Error response from daemon: Conflict. The container name "/pg-docker" is already in use by container "0e265f9862773b4c4b8c828af1975a68b8a84759a7d79556139ba2362c3aaa4d". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.

@@ -7,11 +7,8 @@ import ru.otus.core.repository.executor.DbExecutorImpl;
 import ru.otus.core.sessionmanager.TransactionRunnerJdbc;
 import ru.otus.crm.datasource.DriverManagerDataSource;
 import ru.otus.crm.model.Client;
-import ru.otus.crm.model.Manager;
 import ru.otus.crm.service.DbServiceClientImpl;
-import ru.otus.crm.service.DbServiceManagerImpl;
 import ru.otus.jdbc.mapper.*;
-
 import javax.sql.DataSource;
 
 public class HomeWork {
@@ -21,20 +18,17 @@ public class HomeWork {
 
     private static final Logger log = LoggerFactory.getLogger(HomeWork.class);
 
+
     public static void main(String[] args) {
-        // общая часть
         var dataSource = new DriverManagerDataSource(URL, USER, PASSWORD);
         flywayMigrations(dataSource);
         var transactionRunner = new TransactionRunnerJdbc(dataSource);
         var dbExecutor = new DbExecutorImpl();
 
-        // работа с клиентом
-        EntityClassMetaData entityClassMetaDataClient = new EntityClassMetaDataImpl();
-        EntitySQLMetaData entitySQLMetaDataClient = new EntitySQLMetaDataImpl();
-        var dataTemplateClient = new DataTemplateJdbc<Client>(dbExecutor, entitySQLMetaDataClient);
-        //реализация DataTemplate, универсальная
+        EntityClassMetaData<Client> entityClassMetaDataClient = new EntityClassMetaDataImpl<>();
+        EntitySQLMetaData<Client> entitySQLMetaDataClient = new EntitySQLMetaDataImpl<>();
+        var dataTemplateClient = new DataTemplateJdbc<>(dbExecutor, entitySQLMetaDataClient, entityClassMetaDataClient);
 
-        // код дальше должен остаться
         var dbServiceClient = new DbServiceClientImpl(transactionRunner, dataTemplateClient);
         dbServiceClient.saveClient(new Client("dbServiceFirst"));
 
@@ -44,19 +38,25 @@ public class HomeWork {
         log.info("clientSecondSelected:{}", clientSecondSelected);
 
 
-        // тоже самое - с классом Manager (для него надо сделать свою таблицу)
-        EntityClassMetaData entityClassMetaDataManager = new EntityClassMetaDataImpl();
-        EntitySQLMetaData entitySQLMetaDataManager = new EntitySQLMetaDataImpl();
-        var dataTemplateManager = new DataTemplateJdbc<Manager>(dbExecutor, entitySQLMetaDataManager);
 
-        var dbServiceManager = new DbServiceManagerImpl(transactionRunner, dataTemplateManager);
-        dbServiceManager.saveManager(new Manager("ManagerFirst"));
 
-        var managerSecond = dbServiceManager.saveManager(new Manager("ManagerSecond"));
-        var managerSecondSelected = dbServiceManager.getManager(managerSecond.getNo())
-                .orElseThrow(() -> new RuntimeException("Manager not found, id:" + managerSecond.getNo()));
-        log.info("managerSecondSelected:{}", managerSecondSelected);
+
+
+// Сделайте тоже самое с классом Manager (для него надо сделать свою таблицу)
+
+//        EntityClassMetaData entityClassMetaDataManager; // = new EntityClassMetaDataImpl();
+//        EntitySQLMetaData entitySQLMetaDataManager = null; //= entityClassMetaData entityClassMetaData
+//        var dataTemplateManager = new DataTemplateJdbc<Manager>(dbExecutor, entitySQLMetaDataManager, entityClassMetaData);
+//
+//        var dbServiceManager = new DbServiceManagerImpl(transactionRunner, dataTemplateManager);
+//        dbServiceManager.saveManager(new Manager("ManagerFirst"));
+//
+//        var managerSecond = dbServiceManager.saveManager(new Manager("ManagerSecond"));
+//        var managerSecondSelected = dbServiceManager.getManager(managerSecond.getNo())
+//                .orElseThrow(() -> new RuntimeException("Manager not found, id:" + managerSecond.getNo()));
+//        log.info("managerSecondSelected:{}", managerSecondSelected);
     }
+
 
 
     private static void flywayMigrations(DataSource dataSource) {
