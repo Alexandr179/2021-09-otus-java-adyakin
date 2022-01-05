@@ -19,16 +19,16 @@ public class HomeWork {
     private static final Logger log = LoggerFactory.getLogger(HomeWork.class);
 
 
-    public static void main(String[] args) {
+    public static void main(String... args) {
         var dataSource = new DriverManagerDataSource(URL, USER, PASSWORD);
         flywayMigrations(dataSource);
         var transactionRunner = new TransactionRunnerJdbc(dataSource);
         var dbExecutor = new DbExecutorImpl();
 
-        EntityClassMetaData<Client> entityClassMetaDataClient = new EntityClassMetaDataImpl<>();
-        EntitySQLMetaData<Client> entitySQLMetaDataClient = new EntitySQLMetaDataImpl<>();
-        var dataTemplateClient = new DataTemplateJdbc<>(dbExecutor, entitySQLMetaDataClient, entityClassMetaDataClient);
+        EntityClassMetaDataImpl<Client> entityClassMetaDataClient = new EntityClassMetaDataImpl<>(Client.class);
+        EntitySQLMetaData<Client> entitySQLMetaDataClient = new EntitySQLMetaDataImpl<>(entityClassMetaDataClient);
 
+        var dataTemplateClient = new DataTemplateJdbc<>(dbExecutor, entitySQLMetaDataClient, entityClassMetaDataClient);
         var dbServiceClient = new DbServiceClientImpl(transactionRunner, dataTemplateClient);
         dbServiceClient.saveClient(new Client("dbServiceFirst"));
 
@@ -38,11 +38,6 @@ public class HomeWork {
         log.info("clientSecondSelected:{}", clientSecondSelected);
 
 
-
-
-
-
-// Сделайте тоже самое с классом Manager (для него надо сделать свою таблицу)
 
 //        EntityClassMetaData entityClassMetaDataManager; // = new EntityClassMetaDataImpl();
 //        EntitySQLMetaData entitySQLMetaDataManager = null; //= entityClassMetaData entityClassMetaData
@@ -65,6 +60,7 @@ public class HomeWork {
                 .dataSource(dataSource)
                 .locations("classpath:/db/migration")
                 .load();
+        flyway.clean();
         flyway.migrate();
         log.info("db migration finished.");
         log.info("***");

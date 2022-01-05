@@ -17,11 +17,13 @@ public class EntityClassMetaDataImpl<T> implements EntityClassMetaData<T> {
 
     public Class<T> modelObjectType;
 
-
+    public EntityClassMetaDataImpl(Class<T> modelObjectType) {
+        this.modelObjectType = modelObjectType;
+    }
 
     @Override
     public String getName() {
-        return modelObjectType.toString();
+        return modelObjectType.getSimpleName();
     }
 
     @Override
@@ -50,14 +52,5 @@ public class EntityClassMetaDataImpl<T> implements EntityClassMetaData<T> {
         return getAllFields().stream()
                 .filter(field -> !field.isAnnotationPresent(Id.class))
                 .collect(Collectors.toList());
-    }
-
-
-    public Class<T> getModelObjectType() {
-        return modelObjectType;
-    }
-
-    public void setModelObjectType(Class<T> modelObjectType) {
-        this.modelObjectType = modelObjectType;
     }
 }

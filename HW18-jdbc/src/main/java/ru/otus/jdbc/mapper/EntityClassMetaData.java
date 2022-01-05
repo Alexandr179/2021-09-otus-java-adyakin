@@ -18,8 +18,4 @@ public interface EntityClassMetaData<T> {
     List<Field> getAllFields();
 
     List<Field> getFieldsWithoutId();
-
-
-    Class<T> getModelObjectType();
-    void setModelObjectType(Class<T> modelObjectType);
 }

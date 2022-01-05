@@ -1,23 +1,24 @@
 package ru.otus.jdbc.mapper;
 
 import java.lang.reflect.Field;
-import java.util.List;
+import java.util.Arrays;
 import java.util.stream.Collectors;
+
 
 public class EntitySQLMetaDataImpl<T> implements EntitySQLMetaData<T> {
 
-    private EntityClassMetaData<T> entityClassMetaData;
+    private final EntityClassMetaData<T> entityClassMetaData;
 
 
-    public EntitySQLMetaDataImpl() {
-        this.entityClassMetaData = new EntityClassMetaDataImpl<>();
+    public EntitySQLMetaDataImpl(EntityClassMetaDataImpl<T> entityClassMetaData) {
+        this.entityClassMetaData = entityClassMetaData;
     }
 
 
     @Override
-    public String getSelectByIdSql(Long id) {
+    public String getSelectByIdSql() {
         return "select * from " + entityClassMetaData.getName().toLowerCase() + " where " +
-                entityClassMetaData.getIdField().toString().toLowerCase() + " = " + id;
+                entityClassMetaData.getIdField().getName().toLowerCase() + " = ?";
     }
 
     @Override
@@ -26,23 +27,20 @@ public class EntitySQLMetaDataImpl<T> implements EntitySQLMetaData<T> {
     }
 
     @Override
-    public String getInsertSql(T modelObject) {
-        entityClassMetaData.setModelObjectType((Class<T>)modelObject.getClass());
-
-        List<Field> fieldsWithoutId = entityClassMetaData.getFieldsWithoutId();
-        List<Object> valuesByModelObjects = fieldsWithoutId.stream().map(field -> {
-            try {
-                return modelObject.getClass().getDeclaredField(field.getName()).get(modelObject);
-            } catch (IllegalAccessException | NoSuchFieldException ignored) {// casted ()
-            }
-            return null;
-        }).collect(Collectors.toList());
-        return "insert into " + entityClassMetaData.getName().toLowerCase() + "(" + fieldsWithoutId + ")" +
-                " values (" + valuesByModelObjects + ")";
+    public String getInsertSql() {
+        String fields = entityClassMetaData.getFieldsWithoutId().stream()
+                .map(Field::getName)
+                .collect(Collectors.joining(", "));
+        String values = entityClassMetaData.getFieldsWithoutId().stream()
+                .map(field -> "?")
+                .collect(Collectors.joining(", "));
+        return "insert into " + entityClassMetaData.getName().toLowerCase() +
+                " (" + fields + ")" +
+                " values(" + values + ")";
     }
 
     @Override
-    public String getUpdateSql(T modelObject) {
-        return getInsertSql(modelObject);
+    public String getUpdateSql() {
+        return getInsertSql();
     }
 }

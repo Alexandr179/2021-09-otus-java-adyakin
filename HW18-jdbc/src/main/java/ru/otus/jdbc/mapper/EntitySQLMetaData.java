@@ -6,9 +6,9 @@ package ru.otus.jdbc.mapper;
 public interface EntitySQLMetaData<T> {
     String getSelectAllSql();
 
-    String getSelectByIdSql(Long id);
+    String getSelectByIdSql();
 
-    String getInsertSql(T modelObject);
+    String getInsertSql();
 
-    String getUpdateSql(T modelObject);
+    String getUpdateSql();
 }
