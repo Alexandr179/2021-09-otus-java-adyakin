@@ -1,14 +1,13 @@
 package ru.otus.jdbc.mapper;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.otus.core.repository.DataTemplate;
 import ru.otus.core.repository.DataTemplateException;
 import ru.otus.core.repository.executor.DbExecutor;
-import ru.otus.crm.model.Client;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Parameter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,8 +15,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class DataTemplateJdbc<T> implements DataTemplate<T> {
 
@@ -40,16 +37,11 @@ public class DataTemplateJdbc<T> implements DataTemplate<T> {
     @Override
     public Optional<T> findById(Connection connection, long id) {
         try {
-            var modelObject = dbExecutor.executeSelect(connection, entitySQLMetaData.getSelectByIdSql(),
+            return dbExecutor.executeSelect(connection, entitySQLMetaData.getSelectByIdSql(),
                     List.of(id), rs -> {
                         try {
                             if (rs.next()) {
-                                List<Object> objectParamsByRs = getObjectParamsByRs(rs);
-                                String values = objectParamsByRs.stream().map(Object::toString).collect(Collectors.joining(", "));
-                                T newInstance = entityClassMetaData.getConstructor().newInstance(values);// todo: почему не то кол-во аргумантов??
-                                                                                                    // todo:  ..конструктор клиента (проверено), сущность тоже в норме с двумя полями..
-
-                                return entityClassMetaData.getConstructor().newInstance(objectParamsByRs);
+                                return getInstance(rs);
                             }
                         } catch (SQLException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
                             log.error(e.getMessage(), e);
@@ -57,12 +49,10 @@ public class DataTemplateJdbc<T> implements DataTemplate<T> {
                         }
                         return null;
                     });
-            return Optional.of((T) modelObject);
         } catch (Exception e) {
             throw new DataTemplateException(e);
         }
     }
-
 
     @Override
     public List<T> findAll(Connection connection) {
@@ -83,7 +73,6 @@ public class DataTemplateJdbc<T> implements DataTemplate<T> {
             }
         }).orElseThrow(() -> new RuntimeException("Unexpected error"));
     }
-
 
     @Override
     public long insert(Connection connection, T modelObject) {
@@ -121,5 +110,25 @@ public class DataTemplateJdbc<T> implements DataTemplate<T> {
             }
         }
         return collectObjects;
+    }
+
+    private T getInstance(ResultSet rs) throws InstantiationException, IllegalAccessException, InvocationTargetException {
+        T newInstance = entityClassMetaData.getConstructor().newInstance();
+        List<Object> values = getObjectParamsByRs(rs);
+        List<Field> fields = entityClassMetaData.getAllFields();
+        for (int i = 0; i < fields.size(); i++) {
+            setFieldValue(newInstance, fields.get(i).getName(), values.get(i));
+        }
+        return newInstance;
+    }
+
+    public static void setFieldValue(Object object, String name, Object value) {
+        try {
+            var field = object.getClass().getDeclaredField(name);
+            field.setAccessible(true);
+            field.set(object, value);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

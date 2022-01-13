@@ -5,6 +5,7 @@ import ru.otus.crm.Id;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 public class EntityClassMetaDataImpl<T> implements EntityClassMetaData<T> {
 
     public Class<T> modelObjectType;
+    public List<Field> fields;
 
     public EntityClassMetaDataImpl(Class<T> modelObjectType) {
         this.modelObjectType = modelObjectType;
@@ -44,7 +46,8 @@ public class EntityClassMetaDataImpl<T> implements EntityClassMetaData<T> {
 
     @Override
     public List<Field> getAllFields() {
-        return Arrays.asList(modelObjectType.getDeclaredFields());
+        fields = Arrays.asList(modelObjectType.getDeclaredFields());
+        return fields;
     }
 
     @Override
@@ -52,5 +55,10 @@ public class EntityClassMetaDataImpl<T> implements EntityClassMetaData<T> {
         return getAllFields().stream()
                 .filter(field -> !field.isAnnotationPresent(Id.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public T getInstance(Object[] values) throws IllegalAccessException, InvocationTargetException, InstantiationException {
+        return getConstructor().newInstance(values);
     }
 }
