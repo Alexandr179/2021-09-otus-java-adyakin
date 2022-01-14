@@ -1,32 +1,28 @@
 Группа 2021-09
 ----------------------------------------------------------------------------------------------------
 
-1.  hw01-gradle
+HW18-jdbc
 
     Домашнее задание
-    Проект gradle с модульной структурой
+    Самодельный ORM
     
     Цель:
-    нучиться создавать проект Gradle (Maven), подготовиться к выполнению домашних заданий.
+    Научиться работать с jdbc.
+    На практике освоить многоуровневую архитектуру приложения.
     
-    Создайте аккаунт на github.com (если еще нет)
-    Создайте репозиторий для домашних работ
-    Сделайте checkout репозитория на свой компьютер
-    Создайте локальный бранч hw01-gradle
-    Создать проект gradle
-    В проект добавьте последнюю версию зависимости
-         <groupId>com.google.guava</groupId>
-         <artifactId>guava</artifactId>
-    Создайте модуль hw01-gradle
-    В модуле сделайте класс HelloOtus
-    В этом классе сделайте вызов какого-нибудь метода из guava
-    Создайте "толстый-jar"
-    Убедитесь, что "толстый-jar" запускается.
-    Сделайте pull-request в gitHub
-    Ссылку на PR отправьте на проверку (личный кабинет, чат с преподавателем).
-    При желании, можно сделать maven-проект и далее на курсе работать с maven-ом.
-    Для Maven инструкция аналогичная (просто в тексте замените Gradle на Maven).
+    Работа должна использовать базу данных в docker-контейнере .
+    
+    В модуле homework реализуйте классы:
+    
+    EntityClassMetaData
+    EntitySQLMetaData
+    DataTemplateJdbc
+    Метод main в классе HomeWork должен работать без ошибок.
     
     
-
-
+**
+    проблема c docker-ом (ubuntu): 
+    Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: ...
+     
+    - https://newbedev.com/got-permission-denied-while-trying-to-connect-to-the-docker-da[…]-run-docker-sock-connect-permission-denied-docker-code-example    
+     
