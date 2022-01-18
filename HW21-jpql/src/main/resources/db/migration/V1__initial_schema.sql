@@ -5,7 +5,7 @@ create table clients
 (
     id bigserial not null primary key,
     name varchar(50),
-    address_id bigint
+    address_id bigint default null
 );
 
 create table addresses
