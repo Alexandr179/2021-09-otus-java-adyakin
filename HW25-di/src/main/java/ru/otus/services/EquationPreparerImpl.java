@@ -1,5 +1,6 @@
 package ru.otus.services;
 
+import ru.otus.appcontainer.api.AppComponent;
 import ru.otus.model.DivisionEquation;
 import ru.otus.model.Equation;
 import ru.otus.model.MultiplicationEquation;
@@ -8,7 +9,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@AppComponent(order = 0, name = "equationPreparer")
 public class EquationPreparerImpl implements EquationPreparer {
+
     @Override
     public List<Equation> prepareEquationsFor(int base) {
         List<Equation> equations = new ArrayList<>();

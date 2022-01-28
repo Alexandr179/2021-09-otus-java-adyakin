@@ -1,11 +1,13 @@
 package ru.otus.services;
 
+import ru.otus.appcontainer.api.AppComponent;
 import ru.otus.model.Equation;
 import ru.otus.model.GameResult;
 import ru.otus.model.Player;
 
 import java.util.List;
 
+@AppComponent(order = 2, name = "gameProcessor")
 public class GameProcessorImpl implements GameProcessor {
 
     private static final String MSG_HEADER = "Проверка знаний таблицы умножения";

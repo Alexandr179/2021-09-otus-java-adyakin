@@ -1,7 +1,9 @@
 package ru.otus.services;
 
+import ru.otus.appcontainer.api.AppComponent;
 import ru.otus.model.Player;
 
+@AppComponent(order = 1, name = "playerService")
 public class PlayerServiceImpl implements PlayerService {
 
     private final IOService ioService;

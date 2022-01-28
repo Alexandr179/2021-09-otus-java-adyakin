@@ -1,9 +1,12 @@
 package ru.otus.services;
 
+import ru.otus.appcontainer.api.AppComponent;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+@AppComponent(order = 0, name = "ioService")
 public class IOServiceConsole implements IOService {
     private final PrintStream out;
     private final Scanner in;
