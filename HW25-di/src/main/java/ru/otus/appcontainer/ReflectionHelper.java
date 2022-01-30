@@ -1,6 +1,6 @@
 package ru.otus.appcontainer;
 
-import java.util.Arrays;
+import static java.util.Arrays.stream;
 
 
 public class ReflectionHelper {
@@ -29,13 +29,30 @@ public class ReflectionHelper {
 
     public static Object callMethod(Object object, String name, Object... args) {
         try {
-            var method = object.getClass().getDeclaredMethod(name, toClasses(args));
+            Class<?> objectsClazz = object.getClass();
+            Class<?> [] argsInterfaces = new Class<?>[args.length];
+            for (int i = 0; i < args.length; i++) {
+                Class<?>[] interfaces = args[i].getClass().getInterfaces();
+                argsInterfaces[i] = interfaces[0];// todo: provided is only one interface
+            }
+            var method = objectsClazz.getDeclaredMethod(name, argsInterfaces);
             method.setAccessible(true);
             return method.invoke(object, args);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
+    public static Object callMethod(Object object, String name) {
+        try {
+            var method = object.getClass().getDeclaredMethod(name);
+            method.setAccessible(true);
+            return method.invoke(object);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public static <T> T instantiate(Class<T> type, Object... args) {
         try {
@@ -51,6 +68,6 @@ public class ReflectionHelper {
     }
 
     public static Class<?>[] toClasses(Object[] args) {
-        return Arrays.stream(args).map(Object::getClass).toArray(Class<?>[]::new);
+        return stream(args).map(Object::getClass).toArray(Class<?>[]::new);
     }
 }
