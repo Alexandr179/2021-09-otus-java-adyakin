@@ -18,7 +18,7 @@ public class DbServiceDemo {
 
     public static final String HIBERNATE_CFG_FILE = "hibernate.cfg.xml";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Throwable {
         var configuration = new Configuration().configure(HIBERNATE_CFG_FILE);
 
         var dbUrl = configuration.getProperty("hibernate.connection.url");
@@ -32,6 +32,7 @@ public class DbServiceDemo {
         var transactionManager = new TransactionManagerHibernate(sessionFactory);
 
         var clientTemplate = new DataTemplateHibernate<>(Client.class);
+
 
         var dbServiceClient = new DbServiceClientImpl(transactionManager, clientTemplate);
         dbServiceClient.saveClient(new Client("dbServiceFirst"));

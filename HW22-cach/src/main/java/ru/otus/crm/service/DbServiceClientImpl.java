@@ -7,23 +7,24 @@ import ru.otus.core.sessionmanager.TransactionManager;
 import ru.otus.crm.model.Client;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.WeakHashMap;
 
 public class DbServiceClientImpl implements DBServiceClient {
     private static final Logger log = LoggerFactory.getLogger(DbServiceClientImpl.class);
 
     private final DataTemplate<Client> clientDataTemplate;
     private final TransactionManager transactionManager;
+    private final CacheRepository<Object, Object> cacheRepository;
 
-    Map<Long, Client> cache = new WeakHashMap<>();
+
 
 //    private final HwCache<Long, Client> cache = new HwCacheImpl<>();
 
     public DbServiceClientImpl(TransactionManager transactionManager, DataTemplate<Client> clientDataTemplate) {
         this.transactionManager = transactionManager;
         this.clientDataTemplate = clientDataTemplate;
+        this.cacheRepository = new CacheRepository<>();
+        cacheRepository.listeners.add(cacheRepository.listener);
     }
 
     @Override
@@ -43,14 +44,15 @@ public class DbServiceClientImpl implements DBServiceClient {
 
     @Override
     public Optional<Client> getClient(long id) {
-        Client client = cache.get(id);
+//        cacheRepository.listener.notify(id, null, "get");
+        Client client = (Client)cacheRepository.cache.get(id);
         if (client == null) {
             Optional<Client> optClient = transactionManager.doInReadOnlyTransaction(session -> {
                 var clientOptional = clientDataTemplate.findById(session, id);
                 log.info("optClient: {}", clientOptional);
                 return clientOptional;
             });
-            optClient.ifPresent(existsClient -> cache.put(id, existsClient));
+            optClient.ifPresent(existsClient -> cacheRepository.cache.put(id, existsClient));
             return optClient;
         }
         log.warn("CacheClient: {}", client);

@@ -2,46 +2,42 @@ package ru.otus.cachehw;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.otus.crm.service.DbServiceClientImpl;
-
+import ru.otus.crm.service.CacheRepository;
 
 public class HwCacheImpl<K, V> implements HwCache<K, V> {
-    private static final Logger log = LoggerFactory.getLogger(DbServiceClientImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(HwCacheImpl.class);
 
-    HwCache<K, V> cache = new HwCacheImpl<>();
+    public CacheRepository<K, V> cacheRepository;
 
-    public HwListener<K, V> listener = new HwListener<K, V>() {
-        @Override
-        public void notify(K key, V value, String action) {
-            log.info("key:{}, value:{}, action: {}", key, value, action);
+    public HwCacheImpl() {
+        this.cacheRepository = new CacheRepository<>();
+    }
 
-        }
-    };
 
 
     @Override
     public void put(K key, V value) {
-        cache.put(key, value);
+        cacheRepository.listeners.forEach(listener -> listener.notify(key, value, "put"));
     }
 
     @Override
     public void remove(K key) {
-        cache.remove(key);
+        cacheRepository.listeners.forEach(listener -> listener.notify(key, null, "remove"));
     }
 
     @Override
     public V get(K key) {
-        return cache.get(key);
+        return cacheRepository.cache.get(key);
     }
 
 
     @Override
     public void addListener(HwListener<K, V> listener) {
-        cache.addListener(listener);
+        cacheRepository.listeners.add(listener);
     }
 
     @Override
     public void removeListener(HwListener<K, V> listener) {
-        cache.removeListener(listener);
+        cacheRepository.listeners.remove(listener);
     }
 }
