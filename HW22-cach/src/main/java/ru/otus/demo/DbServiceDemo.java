@@ -33,7 +33,6 @@ public class DbServiceDemo {
 
         var clientTemplate = new DataTemplateHibernate<>(Client.class);
 
-
         var dbServiceClient = new DbServiceClientImpl(transactionManager, clientTemplate);
         dbServiceClient.saveClient(new Client("dbServiceFirst"));
 

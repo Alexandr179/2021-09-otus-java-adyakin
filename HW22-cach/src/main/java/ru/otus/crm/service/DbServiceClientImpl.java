@@ -2,6 +2,8 @@ package ru.otus.crm.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.otus.cachehw.HwCache;
+import ru.otus.cachehw.HwCacheImpl;
 import ru.otus.core.repository.DataTemplate;
 import ru.otus.core.sessionmanager.TransactionManager;
 import ru.otus.crm.model.Client;
@@ -14,18 +16,16 @@ public class DbServiceClientImpl implements DBServiceClient {
 
     private final DataTemplate<Client> clientDataTemplate;
     private final TransactionManager transactionManager;
-    private final CacheRepository<Object, Object> cacheRepository;
+    private final HwCache<Long, Object> hwCache;
 
-
-
-//    private final HwCache<Long, Client> cache = new HwCacheImpl<>();
 
     public DbServiceClientImpl(TransactionManager transactionManager, DataTemplate<Client> clientDataTemplate) {
         this.transactionManager = transactionManager;
         this.clientDataTemplate = clientDataTemplate;
-        this.cacheRepository = new CacheRepository<>();
-        cacheRepository.listeners.add(cacheRepository.listener);
+        this.hwCache = new HwCacheImpl();
     }
+
+
 
     @Override
     public Client saveClient(Client client) {
@@ -44,15 +44,14 @@ public class DbServiceClientImpl implements DBServiceClient {
 
     @Override
     public Optional<Client> getClient(long id) {
-//        cacheRepository.listener.notify(id, null, "get");
-        Client client = (Client)cacheRepository.cache.get(id);
+        Client client = (Client)hwCache.get(id);
         if (client == null) {
             Optional<Client> optClient = transactionManager.doInReadOnlyTransaction(session -> {
                 var clientOptional = clientDataTemplate.findById(session, id);
                 log.info("optClient: {}", clientOptional);
                 return clientOptional;
             });
-            optClient.ifPresent(existsClient -> cacheRepository.cache.put(id, existsClient));
+            optClient.ifPresent(existsClient -> hwCache.put(id, existsClient));
             return optClient;
         }
         log.warn("CacheClient: {}", client);

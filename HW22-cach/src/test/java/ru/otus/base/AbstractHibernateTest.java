@@ -55,7 +55,7 @@ public abstract class AbstractHibernateTest {
 
         transactionManager = new TransactionManagerHibernate(sessionFactory);
         clientTemplate = new DataTemplateHibernate<>(Client.class);
-        dbServiceClient = new DbServiceClientImpl(transactionManager, clientTemplate, cacheRepository);
+        dbServiceClient = new DbServiceClientImpl(transactionManager, clientTemplate);
     }
 
     protected EntityStatistics getUsageStatistics() {
