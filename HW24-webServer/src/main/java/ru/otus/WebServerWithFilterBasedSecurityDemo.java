@@ -12,8 +12,6 @@ import ru.otus.services.UserAuthService;
 import ru.otus.services.UserAuthServiceImpl;
 
 /*
-    Полезные для демо ссылки
-
     // Стартовая страница
     http://localhost:8080
 
