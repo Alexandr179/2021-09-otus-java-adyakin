@@ -1,13 +1,13 @@
 package ru.otus.servlet;
 
 import com.google.gson.Gson;
-import ru.otus.model.User;
-import ru.otus.dao.UserDao;
-
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import ru.otus.dao.UserDao;
+import ru.otus.model.User;
+
 import java.io.IOException;
 
 

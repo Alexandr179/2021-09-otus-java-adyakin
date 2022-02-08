@@ -13,7 +13,6 @@ import ru.otus.services.TemplateProcessor;
 import ru.otus.servlet.UsersApiServlet;
 import ru.otus.servlet.UsersServlet;
 
-
 public class UsersWebServerSimple implements UsersWebServer {
     private static final String START_PAGE_NAME = "index.html";
     private static final String COMMON_RESOURCES_DIR = "static";

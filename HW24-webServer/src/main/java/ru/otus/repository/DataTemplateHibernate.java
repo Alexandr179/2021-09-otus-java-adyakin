@@ -36,8 +36,6 @@ public class DataTemplateHibernate<T> implements DataTemplate<T> {
     }
 
     @Override
-//    @PrePersist
-//    @PreUpdate
     public void insert(Session session, T object) {
         session.persist(object);
     }

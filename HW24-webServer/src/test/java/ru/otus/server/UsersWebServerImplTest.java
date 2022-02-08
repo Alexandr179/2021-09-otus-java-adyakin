@@ -3,7 +3,6 @@ package ru.otus.server;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.*;
-import ru.otus.dao.UserDao;
 import ru.otus.model.User;
 import ru.otus.services.TemplateProcessor;
 import ru.otus.services.UserAuthService;

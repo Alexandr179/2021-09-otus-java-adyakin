@@ -420,3 +420,115 @@ PostgreSQL init process complete; ready for start up.
 2022-01-25 21:09:28.269 UTC [76] LOG:  database system was shut down at 2022-01-25 21:09:28 UTC
 2022-01-25 21:09:28.279 UTC [1] LOG:  database system is ready to accept connections
 2022-01-25 21:50:15.373 UTC [186] LOG:  unexpected EOF on client connection with an open transaction
+The files belonging to this database system will be owned by user "postgres".
+This user must also own the server process.
+
+The database cluster will be initialized with locale "en_US.utf8".
+The default database encoding has accordingly been set to "UTF8".
+The default text search configuration will be set to "english".
+
+Data page checksums are disabled.
+
+fixing permissions on existing directory /var/lib/postgresql/data ... ok
+creating subdirectories ... ok
+selecting dynamic shared memory implementation ... posix
+selecting default max_connections ... 100
+selecting default shared_buffers ... 128MB
+selecting default time zone ... Etc/UTC
+creating configuration files ... ok
+running bootstrap script ... ok
+performing post-bootstrap initialization ... ok
+syncing data to disk ... initdb: warning: enabling "trust" authentication for local connections
+You can change this by editing pg_hba.conf or using the option -A, or
+--auth-local and --auth-host, the next time you run initdb.
+ok
+
+
+Success. You can now start the database server using:
+
+    pg_ctl -D /var/lib/postgresql/data -l logfile start
+
+waiting for server to start....2022-02-06 20:05:13.623 UTC [48] LOG:  starting PostgreSQL 12.9 (Debian 12.9-1.pgdg110+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+2022-02-06 20:05:13.629 UTC [48] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2022-02-06 20:05:13.664 UTC [49] LOG:  database system was shut down at 2022-02-06 20:05:13 UTC
+2022-02-06 20:05:13.676 UTC [48] LOG:  database system is ready to accept connections
+ done
+server started
+CREATE DATABASE
+
+
+/usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+
+2022-02-06 20:05:13.988 UTC [48] LOG:  received fast shutdown request
+waiting for server to shut down....2022-02-06 20:05:13.994 UTC [48] LOG:  aborting any active transactions
+2022-02-06 20:05:13.996 UTC [48] LOG:  background worker "logical replication launcher" (PID 55) exited with exit code 1
+2022-02-06 20:05:13.997 UTC [50] LOG:  shutting down
+2022-02-06 20:05:14.034 UTC [48] LOG:  database system is shut down
+ done
+server stopped
+
+PostgreSQL init process complete; ready for start up.
+
+2022-02-06 20:05:14.109 UTC [1] LOG:  starting PostgreSQL 12.9 (Debian 12.9-1.pgdg110+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+2022-02-06 20:05:14.109 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2022-02-06 20:05:14.109 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2022-02-06 20:05:14.121 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2022-02-06 20:05:14.149 UTC [76] LOG:  database system was shut down at 2022-02-06 20:05:14 UTC
+2022-02-06 20:05:14.159 UTC [1] LOG:  database system is ready to accept connections
+The files belonging to this database system will be owned by user "postgres".
+This user must also own the server process.
+
+The database cluster will be initialized with locale "en_US.utf8".
+The default database encoding has accordingly been set to "UTF8".
+The default text search configuration will be set to "english".
+
+Data page checksums are disabled.
+
+fixing permissions on existing directory /var/lib/postgresql/data ... ok
+creating subdirectories ... ok
+selecting dynamic shared memory implementation ... posix
+selecting default max_connections ... 100
+selecting default shared_buffers ... 128MB
+selecting default time zone ... Etc/UTC
+creating configuration files ... ok
+running bootstrap script ... ok
+performing post-bootstrap initialization ... ok
+syncing data to disk ... ok
+
+
+Success. You can now start the database server using:
+
+    pg_ctl -D /var/lib/postgresql/data -l logfile start
+
+initdb: warning: enabling "trust" authentication for local connections
+You can change this by editing pg_hba.conf or using the option -A, or
+--auth-local and --auth-host, the next time you run initdb.
+waiting for server to start....2022-02-08 18:03:33.324 UTC [48] LOG:  starting PostgreSQL 12.9 (Debian 12.9-1.pgdg110+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+2022-02-08 18:03:33.326 UTC [48] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2022-02-08 18:03:33.345 UTC [49] LOG:  database system was shut down at 2022-02-08 18:03:33 UTC
+2022-02-08 18:03:33.352 UTC [48] LOG:  database system is ready to accept connections
+ done
+server started
+CREATE DATABASE
+
+
+/usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+
+2022-02-08 18:03:33.637 UTC [48] LOG:  received fast shutdown request
+waiting for server to shut down....2022-02-08 18:03:33.639 UTC [48] LOG:  aborting any active transactions
+2022-02-08 18:03:33.641 UTC [48] LOG:  background worker "logical replication launcher" (PID 55) exited with exit code 1
+2022-02-08 18:03:33.643 UTC [50] LOG:  shutting down
+2022-02-08 18:03:33.659 UTC [48] LOG:  database system is shut down
+ done
+server stopped
+
+PostgreSQL init process complete; ready for start up.
+
+2022-02-08 18:03:33.755 UTC [1] LOG:  starting PostgreSQL 12.9 (Debian 12.9-1.pgdg110+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+2022-02-08 18:03:33.755 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2022-02-08 18:03:33.755 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2022-02-08 18:03:33.758 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2022-02-08 18:03:33.779 UTC [76] LOG:  database system was shut down at 2022-02-08 18:03:33 UTC
+2022-02-08 18:03:33.785 UTC [1] LOG:  database system is ready to accept connections
+docker: Error response from daemon: Conflict. The container name "/pg-docker" is already in use by container "d762a1adc07ca63ad383813876c5a7156adbe096aaaa420d0e1140afdba34fdd". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.

@@ -11,8 +11,8 @@ import ru.otus.dbmigrations.MigrationsExecutorFlyway;
 import ru.otus.model.User;
 import ru.otus.repository.DataTemplateHibernate;
 import ru.otus.repository.HibernateUtils;
-import ru.otus.services.DBServiceUser;
-import ru.otus.services.DbServiceUserImpl;
+import ru.otus.dao.UserDao;
+import ru.otus.dao.UserDaoImpl;
 import ru.otus.sessionmanager.TransactionManagerHibernate;
 
 
@@ -20,7 +20,7 @@ public abstract class AbstractHibernateTest {
     protected SessionFactory sessionFactory;
     protected TransactionManagerHibernate transactionManager;
     protected DataTemplateHibernate<User> userTemplate;
-    protected DBServiceUser dbServiceUser;
+    protected UserDao userDao;
 
     private static TestContainersConfig.CustomPostgreSQLContainer CONTAINER;
     public static String HIBERNATE_CFG_FILE;
@@ -55,7 +55,7 @@ public abstract class AbstractHibernateTest {
 
         transactionManager = new TransactionManagerHibernate(sessionFactory);
         userTemplate = new DataTemplateHibernate<>(User.class);
-        dbServiceUser = new DbServiceUserImpl(transactionManager, userTemplate);
+        userDao = new UserDaoImpl(transactionManager, userTemplate);
     }
 
     protected EntityStatistics getUsageStatistics() {

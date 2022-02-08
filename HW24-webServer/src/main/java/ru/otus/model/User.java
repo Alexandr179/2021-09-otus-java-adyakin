@@ -32,6 +32,13 @@ public class User implements Cloneable {
         this.password = password;
     }
 
+    public User(String name, String login, String password) {
+        this.name = name;
+        this.login = login;
+        this.password = password;
+    }
+
+
     public Long getId() {
         return id;
     }
@@ -51,5 +58,10 @@ public class User implements Cloneable {
     @Override
     public User clone() {
         return new User(this.id, this.name, login, password);
+    }
+
+    @Override
+    public String toString() {
+        return "Client{}";
     }
 }

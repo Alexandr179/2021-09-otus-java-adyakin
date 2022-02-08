@@ -16,27 +16,27 @@ class DbServiceUserTest extends AbstractHibernateTest {
         //given
         var user = new User(null, "Vasya", "VasinLogin", "VasinPassword");
         //when
-        var savedUser = dbServiceUser.saveUser(user);
+        var savedUser = userDao.saveUser(user);
         System.out.println(savedUser);
 
         //then
-        var loadedSavedClient = dbServiceUser.getUser(savedUser.getId());
+        var loadedSavedClient = userDao.findById(savedUser.getId());
         assertThat(loadedSavedClient).isPresent();
         assertThat(loadedSavedClient.get()).usingRecursiveComparison().isEqualTo(savedUser);
 
         //when
         var savedClientUpdated = loadedSavedClient.get().clone();
         savedClientUpdated.setName("updatedName");
-        dbServiceUser.saveUser(savedClientUpdated);
+        userDao.saveUser(savedClientUpdated);
 
         //then
-        var loadedClient = dbServiceUser.getUser(savedClientUpdated.getId());
+        var loadedClient = userDao.findById(savedClientUpdated.getId());
         assertThat(loadedClient).isPresent();
         assertThat(loadedClient.get()).usingRecursiveComparison().isEqualTo(savedClientUpdated);
         System.out.println(loadedClient);
 
         //when
-        var clientList = dbServiceUser.findAll();
+        var clientList = userDao.findAll();
 
         //then
         assertThat(clientList.size()).isEqualTo(1);
