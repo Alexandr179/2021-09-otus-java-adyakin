@@ -8,4 +8,8 @@ public interface Versions {
     String jetty = "11.0.7";
     String freemarker = "2.3.31";
     String reflections = "0.10.2";
+    String bootstrap = "5.1.3";
+    String springDocOpenapiUi = "1.6.5";
+
+    String jsr305 = "3.0.2";
 }
