@@ -5,10 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class DbServiceDemo {
+public class Application {
     public static void main(String[] args) {
-        var context = SpringApplication.run(DbServiceDemo.class, args);
+        var context = SpringApplication.run(Application.class, args);
 
-        context.getBean("actionDemo", ActionDemo.class).action();
+        ActionDemo actionDemo = (ActionDemo) context.getBean("actionDemo");
+        actionDemo.action();
     }
 }

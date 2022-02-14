@@ -1,61 +1,63 @@
 package ru.otus.crm.model;
 
+import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-import javax.annotation.Nonnull;
-
-
-@Table("client")
+@Data
+@Table("clients")
 public class Client {
 
     @Id
-    private final Long id;
-    @Nonnull
-    private final String name;
+    private Long id;
+    @Column("name")
+    private String name;
+    @Column("login")
+    private String login;
+    @Column("password")
+    private String password;
 
-    @Nonnull
-    private final String managerId;
 
-    @Nonnull
-    private final Integer orderColumn;
-
-    public Client(String name, String managerId, int orderColumn) {
-        this(null, name, managerId, orderColumn);
-    }
-
-    @PersistenceConstructor
-    public Client(Long id, String name, String managerId, int orderColumn) {
-        this.id = id;
+    public Client(String name, String login, String password) {
         this.name = name;
-        this.managerId = managerId;
-        this.orderColumn = orderColumn;
+        this.login = login;
+        this.password = password;
     }
+
+    public Client() {
+    }
+
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getManagerId() {
-        return managerId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getOrderColumn() {
-        return orderColumn;
+    public String getLogin() {
+        return login;
     }
 
-    @Override
-    public String toString() {
-        return "Client{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", managerId='" + managerId + '\'' +
-                ", orderColumn=" + orderColumn +
-                '}';
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

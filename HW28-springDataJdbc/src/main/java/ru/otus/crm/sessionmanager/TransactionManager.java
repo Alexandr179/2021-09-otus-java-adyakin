@@ -1,4 +1,4 @@
-package ru.otus.sessionmanager;
+package ru.otus.crm.sessionmanager;
 
 public interface TransactionManager {
 

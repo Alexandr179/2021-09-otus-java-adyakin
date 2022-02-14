@@ -1,4 +1,4 @@
-package ru.otus.sessionmanager;
+package ru.otus.crm.sessionmanager;
 
 import java.util.function.Supplier;
 

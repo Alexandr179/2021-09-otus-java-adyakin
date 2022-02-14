@@ -1,14 +1,7 @@
-create table Manager
+create table clients
 (
-    id   varchar(50) not null primary key,
-    label varchar(50)
+    id       bigserial not null primary key,
+    name     varchar(50) not null,
+    login    varchar(50) not null,
+    password varchar(50) not null
 );
-
-create table client
-(
-    id   bigserial not null primary key,
-    order_column int not null,
-    name varchar(50) not null,
-    manager_id varchar(50) not null references Manager (id)
-);
-create index idx_client_manager_id on client(manager_id);

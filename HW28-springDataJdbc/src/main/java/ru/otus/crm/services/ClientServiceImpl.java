@@ -1,10 +1,11 @@
-package ru.otus.crm.service;
+package ru.otus.crm.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.otus.crm.model.Client;
-import ru.otus.sessionmanager.TransactionManager;
+import ru.otus.crm.sessionmanager.TransactionManager;
 import ru.otus.crm.repository.ClientRepository;
 
 import java.util.ArrayList;
@@ -12,16 +13,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DbServiceClientImpl implements DBServiceClient {
-    private static final Logger log = LoggerFactory.getLogger(DbServiceClientImpl.class);
+public class ClientServiceImpl implements ClientService {
+    private static final Logger log = LoggerFactory.getLogger(ClientServiceImpl.class);
 
-    private final TransactionManager transactionManager;
-    private final ClientRepository clientRepository;
+    @Autowired
+    private TransactionManager transactionManager;
+    @Autowired
+    private ClientRepository clientRepository;
 
-    public DbServiceClientImpl(TransactionManager transactionManager, ClientRepository clientRepository) {
-        this.transactionManager = transactionManager;
-        this.clientRepository = clientRepository;
-    }
+
 
     @Override
     public Client saveClient(Client client) {
@@ -46,4 +46,5 @@ public class DbServiceClientImpl implements DBServiceClient {
         log.info("clientList:{}", clientList);
         return clientList;
     }
+
 }

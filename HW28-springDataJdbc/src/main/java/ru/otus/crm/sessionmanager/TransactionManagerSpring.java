@@ -1,4 +1,4 @@
-package ru.otus.sessionmanager;
+package ru.otus.crm.sessionmanager;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
