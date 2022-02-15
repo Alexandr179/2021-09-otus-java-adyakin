@@ -1,0 +1,169 @@
+The files belonging to this database system will be owned by user "postgres".
+This user must also own the server process.
+
+The database cluster will be initialized with locale "en_US.utf8".
+The default database encoding has accordingly been set to "UTF8".
+The default text search configuration will be set to "english".
+
+Data page checksums are disabled.
+
+fixing permissions on existing directory /var/lib/postgresql/data ... ok
+creating subdirectories ... ok
+selecting dynamic shared memory implementation ... posix
+selecting default max_connections ... 100
+selecting default shared_buffers ... 128MB
+selecting default time zone ... Etc/UTC
+creating configuration files ... ok
+running bootstrap script ... ok
+performing post-bootstrap initialization ... ok
+syncing data to disk ... initdb: warning: enabling "trust" authentication for local connections
+You can change this by editing pg_hba.conf or using the option -A, or
+--auth-local and --auth-host, the next time you run initdb.
+ok
+
+
+Success. You can now start the database server using:
+
+    pg_ctl -D /var/lib/postgresql/data -l logfile start
+
+waiting for server to start....2022-02-15 08:20:15.018 UTC [49] LOG:  starting PostgreSQL 12.9 (Debian 12.9-1.pgdg110+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+2022-02-15 08:20:15.020 UTC [49] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2022-02-15 08:20:15.041 UTC [50] LOG:  database system was shut down at 2022-02-15 08:20:14 UTC
+2022-02-15 08:20:15.047 UTC [49] LOG:  database system is ready to accept connections
+ done
+server started
+CREATE DATABASE
+
+
+/usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+
+2022-02-15 08:20:15.369 UTC [49] LOG:  received fast shutdown request
+waiting for server to shut down....2022-02-15 08:20:15.371 UTC [49] LOG:  aborting any active transactions
+2022-02-15 08:20:15.375 UTC [49] LOG:  background worker "logical replication launcher" (PID 56) exited with exit code 1
+2022-02-15 08:20:15.375 UTC [51] LOG:  shutting down
+2022-02-15 08:20:15.389 UTC [49] LOG:  database system is shut down
+ done
+server stopped
+
+PostgreSQL init process complete; ready for start up.
+
+2022-02-15 08:20:15.487 UTC [1] LOG:  starting PostgreSQL 12.9 (Debian 12.9-1.pgdg110+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+2022-02-15 08:20:15.488 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2022-02-15 08:20:15.488 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2022-02-15 08:20:15.494 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2022-02-15 08:20:15.529 UTC [77] LOG:  database system was shut down at 2022-02-15 08:20:15 UTC
+2022-02-15 08:20:15.537 UTC [1] LOG:  database system is ready to accept connections
+2022-02-15 09:35:55.564 UTC [1] LOG:  received fast shutdown request
+2022-02-15 09:35:55.566 UTC [1] LOG:  aborting any active transactions
+2022-02-15 09:35:55.567 UTC [1] LOG:  background worker "logical replication launcher" (PID 83) exited with exit code 1
+2022-02-15 09:35:55.569 UTC [78] LOG:  shutting down
+2022-02-15 09:35:55.583 UTC [1] LOG:  database system is shut down
+The files belonging to this database system will be owned by user "postgres".
+This user must also own the server process.
+
+The database cluster will be initialized with locale "en_US.utf8".
+The default database encoding has accordingly been set to "UTF8".
+The default text search configuration will be set to "english".
+
+Data page checksums are disabled.
+
+fixing permissions on existing directory /var/lib/postgresql/data ... ok
+creating subdirectories ... ok
+selecting dynamic shared memory implementation ... posix
+selecting default max_connections ... 100
+selecting default shared_buffers ... 128MB
+selecting default time zone ... Etc/UTC
+creating configuration files ... ok
+running bootstrap script ... ok
+performing post-bootstrap initialization ... ok
+syncing data to disk ... ok
+
+
+Success. You can now start the database server using:
+
+    pg_ctl -D /var/lib/postgresql/data -l logfile start
+
+initdb: warning: enabling "trust" authentication for local connections
+You can change this by editing pg_hba.conf or using the option -A, or
+--auth-local and --auth-host, the next time you run initdb.
+waiting for server to start....2022-02-15 09:36:12.589 UTC [49] LOG:  starting PostgreSQL 12.9 (Debian 12.9-1.pgdg110+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+2022-02-15 09:36:12.591 UTC [49] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2022-02-15 09:36:12.614 UTC [50] LOG:  database system was shut down at 2022-02-15 09:36:12 UTC
+2022-02-15 09:36:12.621 UTC [49] LOG:  database system is ready to accept connections
+ done
+server started
+CREATE DATABASE
+
+
+/usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+
+2022-02-15 09:36:12.886 UTC [49] LOG:  received fast shutdown request
+waiting for server to shut down....2022-02-15 09:36:12.891 UTC [49] LOG:  aborting any active transactions
+2022-02-15 09:36:12.894 UTC [49] LOG:  background worker "logical replication launcher" (PID 56) exited with exit code 1
+2022-02-15 09:36:12.894 UTC [51] LOG:  shutting down
+2022-02-15 09:36:12.930 UTC [49] LOG:  database system is shut down
+ done
+server stopped
+
+PostgreSQL init process complete; ready for start up.
+
+2022-02-15 09:36:13.009 UTC [1] LOG:  starting PostgreSQL 12.9 (Debian 12.9-1.pgdg110+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+2022-02-15 09:36:13.009 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2022-02-15 09:36:13.009 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2022-02-15 09:36:13.021 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2022-02-15 09:36:13.049 UTC [77] LOG:  database system was shut down at 2022-02-15 09:36:12 UTC
+2022-02-15 09:36:13.058 UTC [1] LOG:  database system is ready to accept connections
+docker: Error response from daemon: Conflict. The container name "/pg-docker" is already in use by container "d7d63841c548e3d236f51720a4e2c8e39302442e84b97986bf0140412c833cdf". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+2022-02-15 09:37:42.470 UTC [95] ERROR:  relation "public.client" does not exist at character 17
+2022-02-15 09:37:42.470 UTC [95] STATEMENT:  SELECT t.*
+	FROM public.client t
+	LIMIT 501
+2022-02-15 10:08:18.184 UTC [241] ERROR:  null value in column "id" violates not-null constraint
+2022-02-15 10:08:18.184 UTC [241] DETAIL:  Failing row contains (null, FirstClient, First, pass).
+2022-02-15 10:08:18.184 UTC [241] STATEMENT:  INSERT INTO "clients" ("id", "login", "name", "password") VALUES ($1, $2, $3, $4)
+	RETURNING *
+2022-02-15 10:47:17.242 UTC [418] ERROR:  null value in column "login" violates not-null constraint
+2022-02-15 10:47:17.242 UTC [418] DETAIL:  Failing row contains (58, Надежда, null, null).
+2022-02-15 10:47:17.242 UTC [418] STATEMENT:  INSERT INTO "clients" ("login", "name", "password") VALUES ($1, $2, $3)
+	RETURNING *
+2022-02-15 10:51:40.785 UTC [438] ERROR:  null value in column "login" violates not-null constraint
+2022-02-15 10:51:40.785 UTC [438] DETAIL:  Failing row contains (62, Надежда, null, null).
+2022-02-15 10:51:40.785 UTC [438] STATEMENT:  INSERT INTO "clients" ("login", "name", "password") VALUES ($1, $2, $3)
+	RETURNING *
+2022-02-15 11:11:30.331 UTC [477] ERROR:  null value in column "login" violates not-null constraint
+2022-02-15 11:11:30.331 UTC [477] DETAIL:  Failing row contains (70, Надежда, null, null).
+2022-02-15 11:11:30.331 UTC [477] STATEMENT:  INSERT INTO "clients" ("login", "name", "password") VALUES ($1, $2, $3)
+	RETURNING *
+2022-02-15 11:11:55.890 UTC [510] ERROR:  null value in column "login" violates not-null constraint
+2022-02-15 11:11:55.890 UTC [510] DETAIL:  Failing row contains (74, Надежда, null, null).
+2022-02-15 11:11:55.890 UTC [510] STATEMENT:  INSERT INTO "clients" ("login", "name", "password") VALUES ($1, $2, $3)
+	RETURNING *
+2022-02-15 12:55:46.414 UTC [756] ERROR:  null value in column "login" violates not-null constraint
+2022-02-15 12:55:46.414 UTC [756] DETAIL:  Failing row contains (78, Надежда, null, null).
+2022-02-15 12:55:46.414 UTC [756] STATEMENT:  INSERT INTO "clients" ("login", "name", "password") VALUES ($1, $2, $3)
+	RETURNING *
+2022-02-15 12:55:46.428 UTC [757] ERROR:  null value in column "login" violates not-null constraint
+2022-02-15 12:55:46.428 UTC [757] DETAIL:  Failing row contains (79, Надежда, null, null).
+2022-02-15 12:55:46.428 UTC [757] STATEMENT:  INSERT INTO "clients" ("login", "name", "password") VALUES ($1, $2, $3)
+	RETURNING *
+2022-02-15 12:56:55.306 UTC [769] ERROR:  null value in column "login" violates not-null constraint
+2022-02-15 12:56:55.306 UTC [769] DETAIL:  Failing row contains (84, Надежда, null, null).
+2022-02-15 12:56:55.306 UTC [769] STATEMENT:  INSERT INTO "clients" ("login", "name", "password") VALUES ($1, $2, $3)
+	RETURNING *
+2022-02-15 12:59:05.769 UTC [781] ERROR:  null value in column "login" violates not-null constraint
+2022-02-15 12:59:05.769 UTC [781] DETAIL:  Failing row contains (88, Надежда, null, null).
+2022-02-15 12:59:05.769 UTC [781] STATEMENT:  INSERT INTO "clients" ("login", "name", "password") VALUES ($1, $2, $3)
+	RETURNING *
+2022-02-15 12:59:40.244 UTC [795] ERROR:  null value in column "login" violates not-null constraint
+2022-02-15 12:59:40.244 UTC [795] DETAIL:  Failing row contains (92, Надежда, null, null).
+2022-02-15 12:59:40.244 UTC [795] STATEMENT:  INSERT INTO "clients" ("login", "name", "password") VALUES ($1, $2, $3)
+	RETURNING *
+2022-02-15 13:11:46.065 UTC [806] ERROR:  null value in column "login" violates not-null constraint
+2022-02-15 13:11:46.065 UTC [806] DETAIL:  Failing row contains (96, Надежда, null, null).
+2022-02-15 13:11:46.065 UTC [806] STATEMENT:  INSERT INTO "clients" ("login", "name", "password") VALUES ($1, $2, $3)
+	RETURNING *
+2022-02-15 13:17:43.313 UTC [841] ERROR:  null value in column "login" violates not-null constraint
+2022-02-15 13:17:43.313 UTC [841] DETAIL:  Failing row contains (100, Надежда, null, null).
+2022-02-15 13:17:43.313 UTC [841] STATEMENT:  INSERT INTO "clients" ("login", "name", "password") VALUES ($1, $2, $3)
+	RETURNING *
