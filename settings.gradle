@@ -1,2 +1,2 @@
 rootProject.name = 'otusJava'
-include 'HW31-executors'
+include 'HW32-concurrentCollections'
